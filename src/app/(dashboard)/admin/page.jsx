@@ -5,6 +5,7 @@ import {
   getAllPayments,
   updateBookingStatus,
 } from "@/actions/adminActions";
+import AdminDashboardSkeleton from "@/components/skeleton/AdminDashboardSkeleton";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("bookings");
@@ -16,8 +17,8 @@ const AdminDashboard = () => {
     const loadData = async () => {
       const bData = await getAllBookings();
       const pData = await getAllPayments();
-      setBookings(bData);
-      setPayments(pData);
+      setBookings(bData || []);
+      setPayments(pData || []);
       setLoading(false);
     };
     loadData();
@@ -27,148 +28,209 @@ const AdminDashboard = () => {
     const res = await updateBookingStatus(id, status);
     if (res.success) {
       alert("Status updated to " + status);
-      // লোকাল স্টেট আপডেট করা যাতে রিফ্রেশ না লাগে
       setBookings(bookings.map((b) => (b._id === id ? { ...b, status } : b)));
     }
   };
 
-  if (loading)
-    return (
-      <div className="text-center py-20 font-bold">
-        Loading Admin Dashboard...
-      </div>
-    );
+  if (loading) return <AdminDashboardSkeleton />;
 
   return (
-    <div className="min-h-screen bg-slate-100 py-10 px-4">
+    // bg-base-200 ব্যবহার করায় এটি ডার্ক মোডে অটোমেটিক ডার্ক হবে
+    <div className="min-h-screen bg-base-200 py-10 md:py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-black text-[#003d4d] mb-8">
-          Admin Control Center
-        </h1>
-
-        {/* Tab Selection */}
-        <div className="tabs tabs-boxed bg-white p-2 mb-8 rounded-2xl inline-flex shadow-sm">
-          <button
-            onClick={() => setActiveTab("bookings")}
-            className={`tab tab-lg font-bold rounded-xl transition-all ${activeTab === "bookings" ? "bg-[#003d4d] text-white" : ""}`}
-          >
-            📋 All Bookings
-          </button>
-          <button
-            onClick={() => setActiveTab("payments")}
-            className={`tab tab-lg font-bold rounded-xl transition-all ${activeTab === "payments" ? "bg-[#003d4d] text-white" : ""}`}
-          >
-            💰 Payment History
-          </button>
+        {/* --- Header Section --- */}
+        <div className="mb-10 text-center md:text-left space-y-2">
+          <h1 className="text-3xl md:text-5xl font-black text-base-content tracking-tighter">
+            Admin <span className="text-primary">Control Center</span>
+          </h1>
+          <p className="text-base-content/60 font-medium">
+            Manage all service requests and financial transactions
+          </p>
         </div>
 
-        {/* --- Table 1: All Bookings --- */}
-        {activeTab === "bookings" && (
-          <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-white">
-            <table className="table w-full">
-              <thead className="bg-slate-50 h-16 text-[#003d4d]">
-                <tr>
-                  <th className="pl-8">Customer</th>
-                  <th>Service</th>
-                  <th>Total Cost</th>
-                  <th>Status</th>
-                  <th className="pr-8 text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bookings.map((book) => (
-                  <tr
-                    key={book._id}
-                    className="border-b border-slate-50 hover:bg-slate-50 transition-colors h-24"
-                  >
-                    <td className="pl-8">
-                      <div className="font-bold">{book.userName || "N/A"}</div>
-                      <div className="text-xs opacity-50">{book.email}</div>
-                    </td>
-                    <td>
-                      <span className="font-medium text-[#003d4d]">
-                        {book.serviceName}
-                      </span>
-                    </td>
-                    <td>
-                      <span className="font-bold text-lg">
-                        ${book.totalCost}
-                      </span>
-                    </td>
-                    <td>
-                      <span
-                        className={`badge badge-lg p-4 font-bold rounded-xl ${
-                          book.status === "Pending"
-                            ? "bg-amber-100 text-amber-600"
-                            : "bg-green-100 text-green-600"
-                        }`}
-                      >
-                        {book.status}
-                      </span>
-                    </td>
-                    <td className="pr-8 text-center">
-                      <select
-                        onChange={(e) =>
-                          handleStatusChange(book._id, e.target.value)
-                        }
-                        className="select select-bordered select-sm rounded-lg"
-                        defaultValue={book.status}
-                      >
-                        <option value="Pending">Pending</option>
-                        <option value="Confirmed">Confirmed</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
-                      </select>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* --- Tab Selection (Responsive) --- */}
+        <div className="flex justify-center md:justify-start mb-10">
+          <div className="tabs tabs-boxed bg-base-100 p-2 rounded-[1.5rem] shadow-lg border border-base-300 inline-flex">
+            <button
+              onClick={() => setActiveTab("bookings")}
+              className={`tab tab-lg md:px-10 h-14 font-black rounded-[1rem] transition-all ${
+                activeTab === "bookings"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-base-content/50 hover:text-primary"
+              }`}
+            >
+              📋 All Bookings
+            </button>
+            <button
+              onClick={() => setActiveTab("payments")}
+              className={`tab tab-lg md:px-10 h-14 font-black rounded-[1rem] transition-all ${
+                activeTab === "payments"
+                  ? "bg-primary text-white shadow-md"
+                  : "text-base-content/50 hover:text-primary"
+              }`}
+            >
+              💰 Payment History
+            </button>
           </div>
-        )}
+        </div>
 
-        {/* --- Table 2: Payment History --- */}
-        {activeTab === "payments" && (
-          <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden border border-white">
-            <table className="table w-full">
-              <thead className="bg-slate-50 h-16 text-[#003d4d]">
-                <tr>
-                  <th className="pl-8">User Email</th>
-                  <th>Transaction ID</th>
-                  <th>Amount</th>
-                  <th>Date</th>
-                  <th className="pr-8">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {payments.map((pay) => (
-                  <tr key={pay._id} className="border-b border-slate-50 h-24">
-                    <td className="pl-8 font-bold">{pay.email}</td>
-                    <td className="font-mono text-sm text-blue-600">
-                      {pay.transactionId}
-                    </td>
-                    <td>
-                      <span className="font-black text-lg text-green-600">
-                        ${pay.amount}
-                      </span>
-                    </td>
-                    <td>{new Date(pay.paymentDate).toLocaleDateString()}</td>
-                    <td className="pr-8">
-                      <span className="badge badge-success text-white font-bold">
-                        SUCCESS
-                      </span>
-                    </td>
+        {/* --- Content Tables Wrapper --- */}
+        <div className="bg-base-100 rounded-[2.5rem] shadow-2xl overflow-hidden border border-base-300">
+          {/* --- Table 1: All Bookings --- */}
+          {activeTab === "bookings" && (
+            <div className="overflow-x-auto">
+              <table className="table w-full">
+                <thead className="bg-base-200 text-primary h-20">
+                  <tr className="border-none">
+                    <th className="pl-8 text-sm font-black uppercase tracking-widest">
+                      Customer
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Service
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Total Cost
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Status
+                    </th>
+                    <th className="pr-8 text-center text-sm font-black uppercase tracking-widest">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            {payments.length === 0 && (
-              <p className="p-10 text-center text-gray-400">
-                No payment records found.
-              </p>
-            )}
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {bookings.map((book) => (
+                    <tr
+                      key={book._id}
+                      className="hover:bg-base-200/50 transition-colors border-b border-base-200 h-28"
+                    >
+                      <td className="pl-8">
+                        <div className="font-black text-base-content text-lg leading-tight">
+                          {book.userName || "Guest"}
+                        </div>
+                        <div className="text-[11px] text-base-content/40 font-bold mt-1">
+                          {book.email}
+                        </div>
+                      </td>
+                      <td>
+                        <span className="badge badge-outline font-bold text-primary px-3 py-3 rounded-lg">
+                          {book.serviceName}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="text-xl font-black text-base-content">
+                          ${book.totalCost}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge badge-md p-4 font-black rounded-xl border-none shadow-sm ${
+                            book.status === "Pending"
+                              ? "bg-warning/10 text-warning"
+                              : "bg-success/10 text-success"
+                          }`}
+                        >
+                          {book.status}
+                        </span>
+                      </td>
+                      <td className="pr-8 text-center">
+                        <select
+                          onChange={(e) =>
+                            handleStatusChange(book._id, e.target.value)
+                          }
+                          className="select select-bordered select-sm rounded-xl font-bold bg-base-200 border-base-300 focus:ring-4 focus:ring-primary/10"
+                          defaultValue={book.status}
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Confirmed">Confirmed</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {bookings.length === 0 && (
+                <p className="p-20 text-center text-base-content/20 font-bold italic">
+                  No bookings found!
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* --- Table 2: Payment History --- */}
+          {activeTab === "payments" && (
+            <div className="overflow-x-auto">
+              <table className="table w-full">
+                <thead className="bg-base-200 text-primary h-20">
+                  <tr className="border-none">
+                    <th className="pl-8 text-sm font-black uppercase tracking-widest">
+                      User Email
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Transaction ID
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Amount
+                    </th>
+                    <th className="text-sm font-black uppercase tracking-widest">
+                      Date
+                    </th>
+                    <th className="pr-8 text-sm font-black uppercase tracking-widest text-center">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {payments.map((pay) => (
+                    <tr
+                      key={pay._id}
+                      className="hover:bg-base-200/50 transition-colors border-b border-base-200 h-28"
+                    >
+                      <td className="pl-8 font-black text-base-content">
+                        {pay.email}
+                      </td>
+                      <td>
+                        <code className="text-[10px] font-bold bg-primary/10 text-primary px-3 py-2 rounded-lg">
+                          {pay.transactionId}
+                        </code>
+                      </td>
+                      <td>
+                        <span className="font-black text-xl text-success">
+                          ${pay.amount}
+                        </span>
+                      </td>
+                      <td className="text-sm font-bold text-base-content/60">
+                        {new Date(pay.paymentDate).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </td>
+                      <td className="pr-8 text-center">
+                        <span className="badge bg-success/10 text-success border-success/20 px-4 py-3 font-black rounded-lg">
+                          PAID
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {payments.length === 0 && (
+                <p className="p-20 text-center text-base-content/20 font-bold italic">
+                  No payment records found.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* --- Branding Footer --- */}
+        <p className="text-center mt-12 text-[10px] font-black text-base-content/20 uppercase tracking-[0.4em]">
+          System Administrator Access Only
+        </p>
       </div>
     </div>
   );

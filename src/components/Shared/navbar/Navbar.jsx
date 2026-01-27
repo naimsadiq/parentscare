@@ -37,7 +37,7 @@ const Navbar = () => {
       )}
       {session?.user?.role === "admin" && (
         <li>
-          <Link href={"/admin/dashboard"} className="text-secondary font-bold">
+          <Link href={"/admin"} className="text-secondary font-bold">
             Admin Panel
           </Link>
         </li>
@@ -134,27 +134,8 @@ const Navbar = () => {
                   <p className="font-black text-primary truncate">
                     {session?.user?.name}
                   </p>
-                  <p className="text-[10px] uppercase font-bold opacity-50">
-                    {session?.user?.role}
-                  </p>
                 </li>
 
-                {session?.user?.role === "admin" && (
-                  <li>
-                    <Link
-                      href="/admin/dashboard"
-                      className="font-bold text-info"
-                    >
-                      Admin Dashboard
-                    </Link>
-                  </li>
-                )}
-                <li>
-                  <Link href="/my-bookings" className="font-medium">
-                    My Bookings
-                  </Link>
-                </li>
-                <div className="divider my-1 opacity-50"></div>
                 <li>
                   <button
                     onClick={() => signOut({ callbackUrl: "/" })}
