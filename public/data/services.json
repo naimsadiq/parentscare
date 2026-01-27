@@ -1,0 +1,56 @@
+[
+  {
+    "id": "baby-care-01",
+    "title": "Baby Sitting & Child Care",
+    "short_description": "Reliable and loving nannies to take care of your little ones with safety and engagement.",
+    "long_description": "Our professional babysitters are trained to handle children of all ages. We focus on safety, interactive play, and emotional support. Whether you need a few hours or a full day, our caregivers ensure your child is in safe hands while you are away. We provide a nurturing environment that helps your child grow and learn.",
+    "price": 500,
+    "image": "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200",
+    "features": [
+      "Experienced & verified nannies",
+      "Interactive playtime & learning activities",
+      "Safe feeding and nap management",
+      "Emergency first-aid knowledge",
+      "Real-time updates for parents",
+      "Flexible hourly or daily shifts",
+      "Homework assistance for older children",
+      "Caring and loving environment"
+    ]
+  },
+  {
+    "id": "elderly-care-02",
+    "title": "Elderly Companion Care",
+    "short_description": "Compassionate care and companionship for your elderly family members at home.",
+    "long_description": "Aging with dignity is our core belief. Our elderly care service provides emotional support, medical reminders, and assistance with daily activities. We ensure your seniors never feel lonely and receive the physical assistance they need to live a healthy, happy life. Our caregivers are trained to provide respectful and patient companionship.",
+    "price": 700,
+    "image": "https://images.unsplash.com/photo-1516307365426-bea591f05011?q=80&w=1200",
+    "features": [
+      "Emotional companionship & conversation",
+      "Timely medication reminders",
+      "Mobility and light exercise support",
+      "Assistance with personal hygiene",
+      "Help with meal serving and feeding",
+      "Safety monitoring and fall prevention",
+      "Flexible day or night shift options",
+      "Gender-matched caregivers for comfort"
+    ]
+  },
+  {
+    "id": "sick-care-03",
+    "title": "Nursing & Sick People Care",
+    "short_description": "Specialized home care for patients recovering from surgery or chronic illness.",
+    "long_description": "Recovering from an illness requires specialized attention. Our caregivers assist patients with medication schedules, vital sign monitoring, and post-surgery recovery steps. We work closely with family instructions to provide hospital-level care in the comfort of your home, ensuring a smooth and speedy recovery process.",
+    "price": 850,
+    "image": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1200",
+    "features": [
+      "Vital signs (BP, Pulse) monitoring",
+      "Professional medication administration",
+      "Wound care and dressing changes",
+      "Post-surgery recovery assistance",
+      "Feeding (NG tube) and nutrition support",
+      "Support for chronic illness patients",
+      "24/7 emergency availability",
+      "Caregivers with nursing backgrounds"
+    ]
+  }
+]

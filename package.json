@@ -9,14 +9,24 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "daisyui": "^5.5.14",
+    "mongodb": "^7.0.0",
     "next": "16.1.4",
+    "next-auth": "^4.24.13",
+    "nodemailer": "^7.0.12",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-responsive-carousel": "^3.2.23",
+    "stripe": "^20.2.0",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.1.18",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
-    "tailwindcss": "^4"
-  }
+    "tailwindcss": "^4.1.18"
+  },
+  "browserslist": "> 1%"
 }
