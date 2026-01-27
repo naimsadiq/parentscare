@@ -3,8 +3,6 @@ import React from "react";
 const loading = () => {
   return (
     <div className="min-h-screen bg-base-100">
-      {/* Fake Navbar */}
-
       {/* Page Body */}
       <main className="container mx-auto px-4 py-12 space-y-8">
         <div className="skeleton h-8 w-1/3"></div>
