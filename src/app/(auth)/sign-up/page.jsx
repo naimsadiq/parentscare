@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/actions/register/route";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -44,7 +45,15 @@ const RegisterPage = () => {
     const result = await createUser(formData);
 
     if (result.success) {
-      alert("Account Created! Please login.");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Account Created! Please login.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // alert("Account Created! Please login.");
       router.push("/sign-in");
     } else {
       setError(result.message || "Registration failed!");

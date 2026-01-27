@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { getSingleService } from "@/actions/getSingleService";
 import { createBooking } from "@/actions/createBooking";
 import BookingSkeleton from "@/components/skeleton/BookingSkeleton";
+import Swal from "sweetalert2";
 
 const BookingPage = () => {
   const params = useParams();
@@ -60,7 +61,15 @@ const BookingPage = () => {
 
   const handleBooking = async (e) => {
     e.preventDefault();
-    if (!session) return alert("Please login first!");
+    if (!session)
+      return Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Please login first!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    // alert("Please login first!");
 
     const bookingData = {
       email: session.user?.email,
@@ -81,10 +90,24 @@ const BookingPage = () => {
 
     const response = await createBooking(bookingData);
     if (response.success) {
-      alert(response.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `${response.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // alert(response.message);
       router.push("/my-bookings");
     } else {
-      alert(response.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: `${response.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // alert(response.message);
     }
   };
 

@@ -5,11 +5,13 @@ import { useSession } from "next-auth/react";
 import { getUserBookings, deleteBooking } from "@/actions/bookingActions";
 import Link from "next/link";
 import MyBookingSkeleton from "@/components/skeleton/MyBookingSkeleton";
+import { useRouter } from "next/navigation";
 
 const MyBookingsPage = () => {
   const { data: session } = useSession();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const loadBookings = async () => {
@@ -34,7 +36,7 @@ const MyBookingsPage = () => {
   const handlePay = async (booking) => {
     const res = await createCheckoutSession(booking);
     if (res.url) {
-      window.location.href = res.url;
+      router.push(res.url);
     } else {
       alert("Payment error: " + res.error);
     }

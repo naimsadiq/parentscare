@@ -6,6 +6,7 @@ import {
   updateBookingStatus,
 } from "@/actions/adminActions";
 import AdminDashboardSkeleton from "@/components/skeleton/AdminDashboardSkeleton";
+import Swal from "sweetalert2";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("bookings");
@@ -25,11 +26,34 @@ const AdminDashboard = () => {
   }, []);
 
   const handleStatusChange = async (id, status) => {
-    const res = await updateBookingStatus(id, status);
-    if (res.success) {
-      alert("Status updated to " + status);
-      setBookings(bookings.map((b) => (b._id === id ? { ...b, status } : b)));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be Status updated",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await updateBookingStatus(id, status);
+        if (res.success) {
+          Swal.fire({
+            title: "Status updated!",
+            text: "Your file has been updated.",
+            icon: "success",
+          });
+          setBookings(
+            bookings.map((b) => (b._id === id ? { ...b, status } : b)),
+          );
+        }
+      }
+    });
+    // const res = await updateBookingStatus(id, status);
+    // if (res.success) {
+    //   alert("Status updated to " + status);
+    //   setBookings(bookings.map((b) => (b._id === id ? { ...b, status } : b)));
+    // }
   };
 
   if (loading) return <AdminDashboardSkeleton />;
