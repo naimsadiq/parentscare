@@ -3,7 +3,7 @@
 **Parents Care** is a modern full-stack web application designed to simplify caregiving services. It provides a reliable and trusted platform where families can find, book, and pay for verified caregivers for children, elderly family members, and those needing specialized home nursing.
 
 ## 🚀 Live Links
-- **Live Deployment:** [Insert Your Vercel Link Here]
+- **Live Deployment:** [(https://parentscare-xi.vercel.app/)]
 - **GitHub Repository:** [(https://github.com/naimsadiq/parentscare.git)]
 
 ---
