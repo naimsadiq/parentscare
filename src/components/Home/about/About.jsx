@@ -4,7 +4,10 @@ import Image from "next/image";
 const About = () => {
   return (
     // bg-base-100 ব্যবহার করায় এটি ডার্ক মোডে অটোমেটিক কালো/ডার্ক গ্রে হবে
-    <section className="py-16 md:py-28 bg-base-100 transition-colors duration-300 overflow-hidden">
+    <section
+      id="about"
+      className="py-16 md:py-28 bg-base-100 transition-colors duration-300 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* --- Left Side: Image with Experience Badge --- */}

@@ -4,6 +4,7 @@ import { createCheckoutSession } from "@/actions/paymentActions";
 import { useSession } from "next-auth/react";
 import { getUserBookings, deleteBooking } from "@/actions/bookingActions";
 import Link from "next/link";
+import MyBookingSkeleton from "@/components/skeleton/MyBookingSkeleton";
 
 const MyBookingsPage = () => {
   const { data: session } = useSession();
@@ -39,12 +40,9 @@ const MyBookingsPage = () => {
     }
   };
 
-  if (loading)
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-base-200">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
+  if (loading) {
+    return <MyBookingSkeleton />;
+  }
 
   return (
     <div className="min-h-screen bg-base-200 py-10 md:py-16 px-4 transition-colors duration-300">

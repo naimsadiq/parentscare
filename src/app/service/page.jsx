@@ -1,6 +1,19 @@
 import ServiceCard from "@/components/cards/ServiceCard";
 import { dbConnect } from "@/lib/dbConnect";
 
+export const metadata = {
+  title: "Our Services | Parents Care",
+  description:
+    "Explore our professional caregiving solutions tailored for your specific needs. Reliable, verified, and compassionate service at your doorstep.",
+  keywords: [
+    "home care",
+    "caregiving",
+    "parents care",
+    "nursing service",
+    "elderly care",
+  ],
+};
+
 const ServicesPage = async () => {
   // ১. ডাটাবেজ থেকে ডাটা নিয়ে আসা
   const servicesCollection = await dbConnect("services");
