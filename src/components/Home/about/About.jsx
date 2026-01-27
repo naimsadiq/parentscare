@@ -15,9 +15,10 @@ const About = () => {
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-base-200">
               <Image
                 width={350}
-                height={500}
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=800"
+                height={600}
+                src="https://i.ibb.co/gZFwp7Qg/doctor.jpg"
                 alt="Caregiver with elderly person"
+                unoptimized
                 className="w-full h-[350px] md:h-[500px] object-cover transform hover:scale-105 transition-transform duration-700"
               />
             </div>
