@@ -6,7 +6,7 @@ import nodemailer from "nodemailer";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// --- ইমেইল পাঠানোর ফাংশন ---
+
 const sendInvoiceEmail = async (booking, transactionId) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -43,7 +43,7 @@ const sendInvoiceEmail = async (booking, transactionId) => {
   await transporter.sendMail(mailOptions);
 };
 
-// --- পেমেন্ট সেশন তৈরি (Success URL এ session_id যোগ করা হয়েছে) ---
+
 export const createCheckoutSession = async (booking) => {
   try {
     const session = await stripe.checkout.sessions.create({
@@ -62,7 +62,7 @@ export const createCheckoutSession = async (booking) => {
         },
       ],
       mode: "payment",
-      // {CHECKOUT_SESSION_ID} এটি স্ট্রাইপ নিজে থেকেই রিপ্লেস করে দিবে
+      
       success_url: `${process.env.NEXTAUTH_URL}/payment/success?bookingId=${booking._id}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/my-bookings`,
       customer_email: booking.email,
@@ -75,13 +75,13 @@ export const createCheckoutSession = async (booking) => {
   }
 };
 
-// --- পেমেন্ট ভেরিফিকেশন এবং ডাটাবেজ আপডেট ---
+
 export const updatePaymentStatus = async (bookingId, sessionId) => {
   try {
-    // ১. স্ট্রাইপ থেকে সেশনটি চেক করা (Security Check)
+    
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-    // যদি পেমেন্ট স্ট্যাটাস 'paid' না হয়, তবে এরর দিবে (কেউ ম্যানুয়ালি লিংকে ঢুকলে ধরা খাবে)
+    
     if (session.payment_status !== "paid") {
       return { success: false, message: "Payment not verified!" };
     }
@@ -95,12 +95,12 @@ export const updatePaymentStatus = async (bookingId, sessionId) => {
 
     if (!booking) return { success: false, message: "Booking not found" };
 
-    // ২. যদি আগে থেকেই Paid থাকে তবে আর কাজ করবে না (Duplicate ইমেইল আটকানো)
+    
     if (booking.paymentStatus === "Paid") {
       return { success: true };
     }
 
-    // ৩. বুকিং আপডেট
+    
     await bookingsCollection.updateOne(
       { _id: new ObjectId(bookingId) },
       {
@@ -112,21 +112,21 @@ export const updatePaymentStatus = async (bookingId, sessionId) => {
       },
     );
 
-    // ৪. পেমেন্ট রেকর্ড সেভ (Real Transaction ID সহ)
+    
     const paymentRecord = {
       bookingId: new ObjectId(bookingId),
       email: booking.email,
       userName: booking.userName,
       serviceName: booking.serviceName,
       amount: booking.totalCost,
-      transactionId: session.payment_intent, // অরিজিনাল ট্রানজাকশন আইডি
+      transactionId: session.payment_intent, 
       status: "Completed",
       paymentDate: new Date(),
     };
 
     const result = await paymentsCollection.insertOne(paymentRecord);
 
-    // ৫. ইমেইল পাঠানো
+    
     if (result.insertedId) {
       await sendInvoiceEmail(booking, session.payment_intent);
     }

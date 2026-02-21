@@ -2,7 +2,7 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 
-// ১. সব বুকিং নিয়ে আসা
+
 export const getAllBookings = async () => {
   try {
     const bookingsCollection = await dbConnect("bookings");
@@ -16,7 +16,7 @@ export const getAllBookings = async () => {
   }
 };
 
-// ২. সব পেমেন্ট নিয়ে আসা
+
 export const getAllPayments = async () => {
   try {
     const paymentsCollection = await dbConnect("payments");
@@ -30,7 +30,7 @@ export const getAllPayments = async () => {
   }
 };
 
-// ৩. বুকিং স্ট্যাটাস আপডেট করা (অ্যাডমিন যখন কনফার্ম করবে)
+
 export const updateBookingStatus = async (id, newStatus) => {
   try {
     const bookingsCollection = await dbConnect("bookings");

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: {
     default: "Parents Care | Trusted Caregiving Services",
-    template: "%s | Parents Care", // এটি দিলে অন্য পেজে 'Service | Parents Care' দেখাবে
+    template: "%s | Parents Care", 
   },
   description:
     "Find reliable babysitters, elderly care, and nursing services in Dhaka.",

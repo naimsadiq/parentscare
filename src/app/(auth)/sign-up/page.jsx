@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/actions/register/route";
 import Swal from "sweetalert2";
+import { signIn } from "next-auth/react"; // <-- Auto login এর জন্য import করা হলো
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -41,20 +42,38 @@ const RegisterPage = () => {
       return;
     }
 
-    // ২. সার্ভার একশন কল
+    // ২. একাউন্ট ক্রিয়েট করা
     const result = await createUser(formData);
 
     if (result.success) {
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Account Created! Please login.",
+        title: "Account Created! Logging you in...", // মেসেজ আপডেট করা হলো
         showConfirmButton: false,
         timer: 1500,
       });
 
-      // alert("Account Created! Please login.");
-      router.push("/sign-in");
+      // ৩. অটোমেটিক লগিন করানো (Auto Login)
+      try {
+        const res = await signIn("credentials", {
+          email: formData.email,
+          password: formData.password,
+          redirect: false,
+        });
+
+        if (res?.error) {
+          setError("Auto-login failed. Please login manually.");
+          setLoading(false);
+          router.push("/sign-in"); // অটো লগিন ফেইল হলে লগিন পেজে পাঠাবে
+        } else {
+          router.push("/"); // লগিন সাকসেস হলে হোমপেজে পাঠাবে
+          router.refresh(); // সেশন আপডেট করার জন্য রিফ্রেশ
+        }
+      } catch (err) {
+        setError("Something went wrong during login.");
+        setLoading(false);
+      }
     } else {
       setError(result.message || "Registration failed!");
       setLoading(false);
@@ -176,7 +195,7 @@ const RegisterPage = () => {
             {loading ? (
               <span className="loading loading-spinner"></span>
             ) : (
-              "Register Now"
+              "Register & Login"
             )}
           </button>
         </form>

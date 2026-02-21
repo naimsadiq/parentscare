@@ -12,7 +12,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ১. ইমেইল ও পাসওয়ার্ড দিয়ে লগইন
+ 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -38,7 +38,7 @@ const LoginPage = () => {
     }
   };
 
-  // ২. গুগল দিয়ে লগইন
+
   const handleGoogleLogin = async () => {
     try {
       await signIn("google", { callbackUrl: "/my-bookings" });
@@ -48,7 +48,7 @@ const LoginPage = () => {
   };
 
   return (
-    // bg-base-200 ব্যবহার করায় ডার্ক মোডে এটি সফট ডার্ক হবে
+    
     <div className="min-h-screen bg-base-200 flex items-center justify-center py-12 px-6 transition-colors duration-300">
       <div className="max-w-md w-full bg-base-100 rounded-[3rem] shadow-2xl p-8 md:p-12 border border-base-300 relative overflow-hidden">
         {/* ডেকোরেটিভ ব্যাকগ্রাউন্ড এলিমেন্ট */}
