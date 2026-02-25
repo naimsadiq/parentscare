@@ -51,17 +51,15 @@ const Banner = () => {
             key={slide.id}
             className="relative h-[450px] md:h-[600px] lg:h-[750px] w-full"
           >
-            {/* Background Image - fill ব্যবহার করা হয়েছে যাতে সব স্ক্রিনে ফিট হয় */}
             <Image
               src={slide.image}
               fill
-              priority={slide.id === 1} // প্রথম স্লাইডটি দ্রুত লোড হওয়ার জন্য
+              priority={slide.id === 1}
               alt={slide.title}
               unoptimized
               className="object-cover"
             />
 
-            {/* Dark Overlay - এটি টেক্সটকে সব মোডে স্পষ্ট রাখবে */}
             <div className="absolute inset-0 bg-black/45 md:bg-black/40"></div>
 
             {/* Content Overlay */}
@@ -79,7 +77,6 @@ const Banner = () => {
                   {slide.description}
                 </p>
 
-                {/* Buttons - থিম অনুযায়ী কালার পরিবর্তন হবে */}
                 <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <Link href="/service" className="w-full sm:w-auto">
                     <button className="btn btn-primary btn-md md:btn-lg px-8 md:px-10 rounded-xl border-none shadow-xl hover:scale-105 transition-transform w-full">
@@ -98,7 +95,6 @@ const Banner = () => {
         ))}
       </Carousel>
 
-      {/* স্লাইডারের নিচে ছোট একটি ডেকোরেটিভ গ্রেডিয়েন্ট (ডার্ক মোডে সুন্দর দেখাবে) */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-base-100 to-transparent z-10"></div>
     </section>
   );

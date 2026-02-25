@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    // bg-base-100 ব্যবহার করায় এটি ডার্ক মোডে অটোমেটিক কালো/ডার্ক গ্রে হবে
     <section
       id="about"
       className="py-16 md:py-28 bg-base-100 transition-colors duration-300 overflow-hidden"
@@ -23,7 +22,6 @@ const About = () => {
               />
             </div>
 
-            {/* Experience Badge - এটি ডার্ক মোডেও উজ্জ্বল থাকবে */}
             <div className="absolute -bottom-8 -right-4 md:-right-8 bg-secondary text-white p-5 md:p-8 rounded-[2rem] shadow-2xl z-20 animate-bounce-slow">
               <p className="text-3xl md:text-5xl font-black">10+</p>
               <p className="text-xs md:text-sm font-bold uppercase tracking-tighter leading-tight">
@@ -31,7 +29,6 @@ const About = () => {
               </p>
             </div>
 
-            {/* Decorative element - ডার্ক মোডে হালকা দেখা যাবে */}
             <div className="absolute top-12 left-12 w-full h-full bg-primary/5 -z-10 rounded-3xl hidden md:block"></div>
           </div>
 

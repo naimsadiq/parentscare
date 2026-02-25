@@ -15,12 +15,10 @@ export const metadata = {
 };
 
 const ServicesPage = async () => {
-  // ১. ডাটাবেজ থেকে ডাটা নিয়ে আসা
   const servicesCollection = await dbConnect("services");
   const services = await servicesCollection.find().toArray();
 
   return (
-    // bg-base-100 ব্যবহার করায় ডার্ক মোডে এটি নিজে থেকেই ডার্ক হবে
     <div className="bg-base-100 min-h-screen py-12 md:py-24 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* --- Header Section --- */}
@@ -42,7 +40,6 @@ const ServicesPage = async () => {
             your doorstep.
           </p>
 
-          {/* ডেকোরেটিভ ডিভাইডার */}
           <div className="flex justify-center pt-4">
             <div className="h-1.5 w-20 bg-primary rounded-full"></div>
             <div className="h-1.5 w-4 bg-secondary rounded-full ml-2"></div>

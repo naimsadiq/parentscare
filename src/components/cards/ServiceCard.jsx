@@ -23,7 +23,6 @@ const ServiceCard = ({ service }) => {
           {service.short_description}
         </p>
 
-        {/* Features List (৩টি ফিচার) */}
         <div className="space-y-3 mb-10 w-full">
           {service.features?.slice(0, 3).map((f, i) => (
             <div

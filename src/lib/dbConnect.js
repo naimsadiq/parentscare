@@ -14,7 +14,7 @@ const client = new MongoClient(uri, {
 
 export const dbConnect = async (collectionName) => {
   try {
-    await client.connect(); // কানেকশন নিশ্চিত করা
+    await client.connect(); 
     const db = client.db(dbName);
     return db.collection(collectionName);
   } catch (e) {

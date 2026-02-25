@@ -36,7 +36,7 @@ const PaymentSuccessContent = () => {
   }, [bookingId, sessionId, router]);
 
   return (
-    // bg-base-200 ব্যবহার করায় ডার্ক মোডে এটি সফট ডার্ক হবে
+    
     <div className="min-h-screen flex flex-col items-center justify-center bg-base-200 px-6 transition-colors duration-300">
       <div className="bg-base-100 p-8 md:p-14 rounded-[3rem] shadow-2xl text-center max-w-lg w-full border border-base-300 relative overflow-hidden">
         {loading ? (

@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
-/* ১. DaisyUI Plugin কনফিগারেশন */
 @plugin "daisyui" {
   themes:
     light --default,
     dark;
 }
 
-/* ২. থিম কালার কাস্টমাইজেশন (OKLCH ফরম্যাট) */
 @plugin "daisyui/theme" {
   name: "light";
-  --color-primary: oklch(25% 0.08 200); /* #003d4d এর কাছাকাছি */
-  --color-secondary: oklch(75% 0.18 155); /* Care Green */
+  --color-primary: oklch(25% 0.08 200);
+  --color-secondary: oklch(75% 0.18 155);
   --color-base-100: oklch(100% 0 0);
   --color-base-content: oklch(20% 0.02 200);
 }
@@ -24,20 +22,16 @@
   --color-base-content: oklch(95% 0.01 200);
 }
 
-/* ৩. ডার্ক মোড সাপোর্ট */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-/* ৪. গ্লোবাল ফন্ট ও বডি স্টাইল */
 :root {
   font-family: "Source Sans 3", sans-serif;
 }
 
 body {
-  /* এখানে @apply ব্যবহার করা হয়েছে যাতে এরর না আসে */
   @apply bg-base-100 text-base-content antialiased min-h-screen;
 }
 
-/* ৫. স্মুথ থিম ট্রানজিশন (ঐচ্ছিক কিন্তু সুন্দর দেখায়) */
 * {
   transition:
     background-color 0.3s ease,

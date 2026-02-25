@@ -5,7 +5,6 @@ const ThemeToggle = () => {
   const [theme, setTheme] = useState("light");
   const [mounted, setMounted] = useState(false);
 
-  // ১. শুধুমাত্র মাউন্ট চেক করার জন্য ইফেক্ট
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -14,7 +13,6 @@ const ThemeToggle = () => {
     setMounted(true);
   }, []);
 
-  // ২. থিম পরিবর্তন হ্যান্ডলার
   const handleTheme = (e) => {
     const newTheme = e.target.checked ? "dark" : "light";
     setTheme(newTheme);
@@ -22,21 +20,18 @@ const ThemeToggle = () => {
     document.documentElement.setAttribute("data-theme", newTheme);
   };
 
-  // মাউন্ট হওয়ার আগে কিছু রেন্ডার না করা (Hydration Error এবং Warning এড়াতে)
   if (!mounted) {
-    return <div className="p-5"></div>; // একটি বাফার স্পেস
+    return <div className="p-5"></div>;
   }
 
   return (
     <label className="swap swap-rotate btn btn-ghost btn-circle">
-      {/* চেকবক্স */}
       <input
         type="checkbox"
         onChange={handleTheme}
         checked={theme === "dark"}
       />
 
-      {/* Sun Icon (Light Mode এ দেখাবে) */}
       <svg
         className="swap-off h-7 w-7 fill-current text-yellow-500"
         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +40,6 @@ const ThemeToggle = () => {
         <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,18.36,17ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Z" />
       </svg>
 
-      {/* Moon Icon (Night Mode এ দেখাবে) */}
       <svg
         className="swap-on h-7 w-7 fill-current text-[#003d4d]"
         xmlns="http://www.w3.org/2000/svg"

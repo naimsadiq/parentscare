@@ -56,7 +56,6 @@ const stats = [
 
 const Testimonials = () => {
   return (
-    // bg-base-200 ডার্ক মোডে অটোমেটিক ডার্ক হবে
     <section className="py-20 md:py-32 bg-base-200 transition-colors duration-300">
       <div className="container mx-auto px-6">
         {/* --- 1. Success Metrics Section --- */}

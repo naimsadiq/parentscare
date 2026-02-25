@@ -27,40 +27,31 @@ const ServiceDetails = async ({ params }) => {
   }
 
   return (
-    // bg-base-100 ব্যবহার করায় ডার্ক মোডে এটি নিজে থেকেই ডার্ক হবে
     <div className="min-h-screen bg-base-100 py-10 md:py-24 transition-colors duration-300">
       <div className="container mx-auto px-6 lg:px-8">
-        {/* মেইন গ্রিড লেআউট */}
         <div className="flex flex-col lg:flex-row gap-10 md:gap-16 items-start">
-          {/* --- ১. বাম পাশ: সার্ভিস ইমেজ (Clean & Simple) --- */}
           <div className="w-full lg:w-1/2 lg:sticky lg:top-24">
             <div className="relative group">
-              {/* মেইন ইমেজ কন্টেইনার */}
               <div className="rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-xl border-2 md:border-4 border-base-200 bg-base-200">
                 <Image
                   width={800}
                   height={1000}
                   src={service.image}
                   alt={service.title}
-                  // হোভার ইফেক্ট বা ট্রানজিশন পুরোপুরি সরিয়ে দেওয়া হয়েছে
                   className="w-full h-[300px] md:h-[500px] lg:h-[600px] object-cover"
                   priority
                 />
               </div>
 
-              {/* ডেকোরেটিভ শ্যাডো এলিমেন্ট (ঐচ্ছিক - এটি ছবিকে একটু গভীরতা দেয়) */}
               <div className="hidden lg:block absolute -z-10 top-6 left-6 w-full h-full bg-primary/5 rounded-[3rem]"></div>
             </div>
 
-            {/* মোবাইলের জন্য ছোট একটি ট্যাগলাইন (ঐচ্ছিক) */}
             <p className="lg:hidden text-center mt-4 text-xs font-bold text-base-content/30 uppercase tracking-widest">
               Professional Care Service
             </p>
           </div>
 
-          {/* --- ২. ডান পাশ: সার্ভিস কন্টেন্ট --- */}
           <div className="w-full lg:w-1/2 space-y-8">
-            {/* ব্যাজ এবং টাইটেল */}
             <div>
               <div className="badge badge-primary font-black px-4 py-3 mb-6 uppercase tracking-widest text-[10px]">
                 Premium Home Service
@@ -70,7 +61,6 @@ const ServiceDetails = async ({ params }) => {
               </h1>
             </div>
 
-            {/* কস্ট এবং রেটিং বক্স */}
             <div className="bg-base-200 p-6 md:p-10 rounded-[2.5rem] border border-base-300 flex flex-col sm:flex-row justify-between items-center gap-6 shadow-inner">
               <div className="text-center sm:text-left">
                 <p className="text-base-content/50 text-xs font-black uppercase tracking-widest mb-1">
@@ -102,12 +92,10 @@ const ServiceDetails = async ({ params }) => {
               </div>
             </div>
 
-            {/* ডেসক্রিপশন */}
             <p className="text-base-content/70 text-lg md:text-xl leading-relaxed font-medium">
               {service.long_description}
             </p>
 
-            {/* সুযোগ-সুবিধা লিস্ট */}
             <div className="space-y-6">
               <h3 className="text-2xl font-black text-base-content tracking-tight flex items-center gap-3">
                 <span className="w-8 h-1.5 bg-primary rounded-full"></span>
@@ -144,7 +132,6 @@ const ServiceDetails = async ({ params }) => {
               </div>
             </div>
 
-            {/* বুকিং বাটন */}
             <div className="pt-10">
               <Link href={`/booking/${service.id}`}>
                 <button className="btn btn-primary btn-block h-20 rounded-[2rem] text-xl md:text-2xl font-black shadow-2xl shadow-primary/30 border-none hover:scale-[1.01] active:scale-95 text-white transition-all">

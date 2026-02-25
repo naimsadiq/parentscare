@@ -12,7 +12,6 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
- 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -38,7 +37,6 @@ const LoginPage = () => {
     }
   };
 
-
   const handleGoogleLogin = async () => {
     try {
       await signIn("google", { callbackUrl: "/my-bookings" });
@@ -48,10 +46,8 @@ const LoginPage = () => {
   };
 
   return (
-    
     <div className="min-h-screen bg-base-200 flex items-center justify-center py-12 px-6 transition-colors duration-300">
       <div className="max-w-md w-full bg-base-100 rounded-[3rem] shadow-2xl p-8 md:p-12 border border-base-300 relative overflow-hidden">
-        {/* ডেকোরেটিভ ব্যাকগ্রাউন্ড এলিমেন্ট */}
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
 
         {/* Header */}

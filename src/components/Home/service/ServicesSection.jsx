@@ -3,7 +3,6 @@ import { dbConnect } from "@/lib/dbConnect";
 import ServiceCard from "@/components/cards/ServiceCard";
 
 const ServicesSection = async () => {
-  // ১. ডাটাবেজ থেকে ডাটা নিয়ে আসা
   const servicesCollection = await dbConnect("services");
   const servicesData = await servicesCollection.find().toArray();
 
@@ -25,10 +24,8 @@ const ServicesSection = async () => {
           </p>
         </div>
 
-        {/* Service Cards Grid - ৩টি কলাম রেসপন্সিভ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {servicesData.map((service) => (
-            // Reusable ServiceCard কম্পোনেন্ট কল করা হয়েছে
             <ServiceCard key={service._id.toString()} service={service} />
           ))}
         </div>

@@ -9,7 +9,7 @@ import NavbarSkeleton from "@/components/skeleton/NavbarSkeleton";
 const Navbar = () => {
   const { data: session, status } = useSession();
 
-  // মেনু লিঙ্কগুলো (Common for Desktop & Mobile)
+  
   const links = (
     <>
       <li>
@@ -56,7 +56,7 @@ const Navbar = () => {
   }
 
   return (
-    // bg-base-100 ব্যবহার করা হয়েছে যাতে ডার্ক মোডে এটি অটোমেটিক কালো হয়
+    
     <nav className="bg-base-100/80 backdrop-blur-md shadow-sm border-b border-base-200 sticky top-0 z-50 transition-all duration-300">
       <div className="navbar container mx-auto px-2 md:px-4">
         {/* --- Navbar Start (Mobile Menu & Logo) --- */}

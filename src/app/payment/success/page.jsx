@@ -3,7 +3,6 @@ import { Suspense } from "react";
 
 const PaymentSuccessPage = () => {
   return (
-    // Fallback UI টিকেও থিম-ফ্রেন্ডলি করা হয়েছে
     <Suspense
       fallback={
         <div className="min-h-screen flex flex-col items-center justify-center bg-base-100">

@@ -59,7 +59,7 @@ const AdminDashboard = () => {
   if (loading) return <AdminDashboardSkeleton />;
 
   return (
-    // bg-base-200 ব্যবহার করায় এটি ডার্ক মোডে অটোমেটিক ডার্ক হবে
+    
     <div className="min-h-screen bg-base-200 py-10 md:py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* --- Header Section --- */}

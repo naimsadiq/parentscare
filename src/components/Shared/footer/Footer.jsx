@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    // bg-base-300 ব্যবহার করা হয়েছে যাতে মেইন বডির চেয়ে ফুটারটি একটু আলাদা দেখায়
+    
     <div className="bg-base-200 text-base-content border-t border-base-300 transition-colors duration-300">
       <footer className="footer container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* --- Column 1: Brand Info --- */}
